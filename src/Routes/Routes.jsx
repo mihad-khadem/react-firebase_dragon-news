@@ -1,23 +1,19 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-const { createBrowserRouter, RouterProvider } = require("react-router-dom");
-const { default: MainLayout } = require("../Layout/MainLayout");
-const { default: Home } = require("../Components/Home/Home");
-const router = createBrowserRouter([
+import { createBrowserRouter } from "react-router-dom";
+import MainLayout  from "../Layout/MainLayout";
+import Home from "../Components/Home/Home";
+
+const routes = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
     children: [
       {
         path: "/",
+        loader:() => fetch('/data/news.json'),
         element: <Home></Home>,
       },
     ],
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
-);
+export default routes;
