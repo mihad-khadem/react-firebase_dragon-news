@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout  from "../Layout/MainLayout";
 import Home from "../Components/Home/Home";
+import Login from "../Components/Login-Register/Login/Login";
 
 const routes = createBrowserRouter([
   {
@@ -12,6 +13,10 @@ const routes = createBrowserRouter([
         loader:() => fetch('/data/news.json'),
         element: <Home></Home>,
       },
+      {
+        path: '/Login',
+        element: <Login></Login>
+      }
     ],
   },
 ]);

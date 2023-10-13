@@ -1,18 +1,28 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import userpng from "/assets/user.png"
+import userpng from "/assets/user.png";
 
 const Navbar = () => {
   const links = (
     <>
       <li>
-        <NavLink>Home</NavLink>
+        <NavLink
+          className={({ isActive}) =>
+            isActive ? "" : " bg-gray-700 text-white"
+          }
+        >
+          Home
+        </NavLink>
       </li>
       <li>
-        <NavLink>About</NavLink>
+        <NavLink className={({ isActive }) =>
+                isActive ? "" : "bg-gray-700 text-white"
+              }>About</NavLink>
       </li>
       <li>
-        <NavLink>Career</NavLink>
+        <NavLink className={({ isActive }) =>
+                  isActive ? "" : "bg-gray-700 text-white"
+              }>Career</NavLink>
       </li>
     </>
   );
@@ -66,7 +76,7 @@ const Navbar = () => {
                     <span className="badge">New</span>
                   </a>
                 </li>
-                
+
                 <li>
                   <a>Logout</a>
                 </li>
@@ -75,9 +85,9 @@ const Navbar = () => {
           </div>
           <div>
             {/* Login Button */}
-          <Link>
-            <button className="btn">Login</button>
-          </Link>
+            <Link to='/login'>
+              <button className="btn">Login</button>
+            </Link>
           </div>
         </div>
       </div>
