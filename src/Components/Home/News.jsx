@@ -1,12 +1,14 @@
+import { Link } from "react-router-dom";
+
 const News = ({ news }) => {
-  const { _id, image_url,title, thumbnail_url } = news;
-  console.log(news);
+  const { _id, image_url,title, thumbnail_url, details } = news;
   return (
     <div>
       <div className="py-3">
         <div className="relative flex max-w-full flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
           <div className="relative m-0 overflow-hidden rounded-none bg-transparent bg-clip-border text-gray-700 shadow-none">
             <img
+              className="w-full"
               src={image_url}
               alt="ui/ux review check"
             />
@@ -15,10 +17,9 @@ const News = ({ news }) => {
             <h4 className="block font-sans text-2xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
               {title}
             </h4>
-            <p className="mt-3 block font-sans text-xl font-normal leading-relaxed text-gray-700 antialiased">
-              Because it's about motivating the doers. Because I'm here to
-              follow my dreams and inspire others.
-            </p>
+           {
+            details.length > 200 ? <p>{details.slice(0,200)} <Link to={`/news/${_id}`} className="text-blue-700 hover:underline">Read More..</Link></p> : <p>{details}</p>
+           }
           </div>
           <div className="flex items-center justify-between p-6">
             <div className="flex items-center -space-x-3">

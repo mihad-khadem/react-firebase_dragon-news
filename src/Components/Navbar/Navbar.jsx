@@ -1,28 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
-import userpng from "/assets/user.png";
+import userPng from "/assets/user.png";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext)
+  const handleSignOut = (e) => {
+      logOut()
+      .then(res => console.log(res.user))
+      .catch(err => console.log(err))
+  }
   const links = (
     <>
       <li>
         <NavLink
-          className={({ isActive}) =>
-            isActive ? "" : " bg-gray-700 text-white"
-          }
+        to='/'
+          
         >
           Home
         </NavLink>
       </li>
       <li>
-        <NavLink className={({ isActive }) =>
-                isActive ? "" : "bg-gray-700 text-white"
-              }>About</NavLink>
+        <NavLink to='/about' >About</NavLink>
       </li>
       <li>
-        <NavLink className={({ isActive }) =>
-                  isActive ? "" : "bg-gray-700 text-white"
-              }>Career</NavLink>
+        <NavLink to='/career' >Career</NavLink>
       </li>
     </>
   );
@@ -63,7 +65,7 @@ const Navbar = () => {
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
-                  <img src={userpng} />
+                  <img src={  userPng } />
                 </div>
               </label>
               <ul
@@ -85,9 +87,14 @@ const Navbar = () => {
           </div>
           <div>
             {/* Login Button */}
-            <Link to='/login'>
+            {
+              user ? <button onClick={handleSignOut} className="btn">Log Out</button>
+              : <Link to='/login'>
               <button className="btn">Login</button>
             </Link>
+            }
+            
+            
           </div>
         </div>
       </div>
